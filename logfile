@@ -1,0 +1,13 @@
+LOG:  database system was shut down at 2012-06-07 11:47:15 EDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "biomorph" does not exist
+FATAL:  database "tender" does not exist
+FATAL:  database "data" does not exist
+FATAL:  database "tender" does not exist
+FATAL:  database "tender" does not exist
+FATAL:  database "tender" does not exist
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down

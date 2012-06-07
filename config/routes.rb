@@ -1,4 +1,6 @@
 Biomorph::Application.routes.draw do
+  resources :genomes
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
