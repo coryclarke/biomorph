@@ -1,4 +1,4 @@
-
+ 
 class GenomesController < ApplicationController
   # GET /genomes
   # GET /genomes.json
