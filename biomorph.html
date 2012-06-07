@@ -1,0 +1,224 @@
+<html>
+<head>
+
+
+
+</head>
+<body>
+
+<p><canvas id="canvas1" width="200" height="200"></canvas></p>
+
+
+
+<script type="text/javascript">
+
+
+
+function Turtle(clr,prc,recur){
+
+
+	this.context = prc
+	this.positionx = 0;
+	this.positiony = 0;
+	this.direction = 0;
+	this.recursion = recur;
+	this.color = clr;
+	
+	
+	this.setPosition = function(px,py){
+	
+		this.positionx = px;
+		this.positiony = py;
+		
+	
+	};
+	
+	this.getPositionX = function(){
+	
+		return Number(this.positionx);
+		
+	};
+	
+	this.getPositionY = function(){
+	
+		return Number(this.positiony);
+		
+	};
+	
+	this.setColor = function(color){
+	console.log(color);
+		this.color = Math.round(Math.random()*80);
+		
+	};
+	
+	this.move = function(dis){
+		
+		
+		movx = dis * Math.cos(this.direction);
+		movy = dis * Math.sin(this.direction);
+		
+	
+		this.context.beginPath();
+		this.context.moveTo(this.positionx,this.positiony); // give the (x,y) coordinates
+		this.context.lineTo(this.positionx+movx,this.positiony+movy);
+	
+		this.context.strokeStyle = "rgb(" + Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + ","+ Math.round(Math.random()*255) + ")" ;
+		this.context.lineWidth   = 1;
+		this.context.stroke();
+		this.context.closePath();
+	
+		this.positionx = this.positionx + movx;
+		this.positiony = this.positiony + movy;
+	
+	};
+
+	this.turn = function(dir){
+		this.direction = this.direction + this.deg2rad(dir);
+	
+	};
+
+	this.deg2rad = function(deg){
+		return deg * (Math.PI/180);
+	}
+	this.rad2deg = function(rad){
+		return rad * (180/Math.PI);
+	}
+
+}
+
+
+function tree(image,length,lengthmult,reclimit,x,y,angle,spread,spreadmult,recbias,branchbias,pen,recursion){ 
+
+		
+		
+//create a turtle to use to draw a trunk 
+var turt = new Turtle(pen,image,recursion); 
+
+//set its starting position 
+turt.setPosition(x,y); 
+//set its initial orientation 
+
+
+if((recursion % branchbias) == 1){
+	thislength = length * -2;
+}else{
+	thislength = length;
+}
+
+
+turt.setColor(recursion);
+	
+turt.turn(angle); 
+//move to draw a line 
+turt.move(thislength); 
+
+//get the position 
+var positionx =  turt.getPositionX(); 
+var positiony =  turt.getPositionY(); 
+
+
+length *= lengthmult;
+
+spread *= spreadmult;
+ 
+recursion++;
+
+thisspread = spread + ((recursion * recbias)/recursion);
+
+	 
+	if(recursion < reclimit){ 
+	//call the tree function again to create a branch. Cut the $lenght in half so each branch is smaller than the last 
+	//also, change the angle so that the branch splits from the trunk
+		
+		tree(image,length,lengthmult,reclimit,Number(positionx),Number(positiony),angle,spread,spreadmult,recbias,branchbias,pen,recursion); 
+		tree(image,length,lengthmult,reclimit,Number(positionx),Number(positiony),(angle-thisspread),spread,spreadmult,recbias,branchbias,pen,recursion); 
+		tree(image,length,lengthmult,reclimit,Number(positionx),Number(positiony),(angle+thisspread),spread,spreadmult,recbias,branchbias,pen,recursion); 
+	
+	} 
+
+
+} 
+
+
+
+
+
+function runtree(cont) {
+
+	// Get a reference to the element.
+	var elem = document.getElementById('canvas1');
+	
+	// Always check for properties and methods, to make sure your code doesn't break 
+	// in other browsers.
+	if (elem && elem.getContext) {
+	  // Get the 2d context.
+	  // Remember: you can only initialize one context per element.
+	  var context = elem.getContext('2d');
+
+	}
+	
+	var pointArray = [];
+
+ 
+
+	//context.beginPath();
+		
+	
+	//if(spread == undefined){
+	
+		spread = 35;
+	
+	//}
+	
+	
+	//if(!spreadmult){
+	
+		spreadmult = 1;
+	
+	//}
+	
+	//if(!lengthmult){
+	
+		lengthmult = .7;
+	
+	//}
+	
+	//if(!length){
+	
+	
+		length = 40;
+	//}
+	
+	
+	//if(recursion<2){
+		recursion = 4;
+	
+	//}
+	
+	//if(recbias < 1){
+	
+		recbias = 1;
+	//}
+	
+	branchbias = 0;
+	
+	
+	tree(context,length,lengthmult,recursion,100,100,-90,spread,spreadmult,recbias,branchbias,0,0);
+	
+	
+
+	//context.closePath();
+
+
+
+};
+
+
+runtree();
+
+</script>
+
+
+
+</body>
+</html>

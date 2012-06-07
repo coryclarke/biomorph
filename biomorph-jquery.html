@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="reset.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8"/>
+    <title>biomorph</title>
+    
+  </head>
+  
+  <body>
+  	<div id="container">
+  		<div id="left">
+			<div id="overlay1" class="overlay">&nbsp</div>
+			<div id="slide1" class="slide">
+				&nbsp;
+			</div>
+			<div id="canvas1" class="canvas">
+			</div>
+  		</div>
+  		<div id="right">
+			<div id="overlay2" class="overlay">&nbsp</div>
+			<div id="slide2" class="slide">
+				&nbsp;
+			</div>
+			<div id="canvas2" class="canvas">
+			</div>
+  		</div>
+	<div>
+	
+    <script src="jquery.js"></script>
+    <script src="jgestures.js"></script>
+    <script src="turtle.js"></script>
+    <script src="genome.js"></script>
+    <script src="phenome.js"></script>
+    
+    
+    <script>
+       $(document).ready(function(){
+		   
+
+		function swipe(event,info){
+		
+			//swipe:1:left:down
+			var i = info.description.split(":");
+			
+			switch(i[2]){
+			
+				case "right":
+				
+					
+					pickRight();
+					
+					
+				break;
+				
+				case "left":
+				
+					pickLeft();
+					
+				break;
+			
+			}		
+			
+		}
+		
+		function pickRight(){
+			
+			
+			$('#canvas1').fadeOut(500,function(){
+				
+				$('#slide1').css('top',"-700px");
+				$('#overlay1').fadeIn(500,function(){
+					
+					
+					$('#canvas2').fadeOut(500,function(){
+					
+						$('#slide2').css('top',"-700px");
+					
+						$('#overlay2').fadeOut(500,function(){
+							window.location = g1.toURL();
+					
+						});
+						
+					});
+				
+				});
+					
+					
+			});
+		
+		}
+		
+		function pickLeft(){
+			
+			$('#canvas2').fadeOut(500,function(){
+				
+				$('#slide2').css('top',"-700px");
+				$('#overlay2').fadeIn(500,function(){
+					
+					
+					$('#canvas1').fadeOut(500,function(){
+					
+						$('#slide1').css('top',"-700px");
+					
+						$('#overlay1').fadeOut(500,function(){
+							window.location = g2.toURL();
+					
+						});
+						
+					});
+				
+				});
+					
+					
+			});
+		
+		}
+		
+		
+		
+		
+		var width = 500; 
+		var height = 700;   
+		   
+		   
+		   
+		var container =	$('#container');
+		container.width(width*2);
+		container.bind('swipeone',swipe);
+			
+		var g1 = new Genome();
+		g1.loadDataFromURL();
+		g1.mutate();
+		
+		var g2 = new Genome();
+		g2.loadDataFromURL();
+		g2.mutate();
+			
+		
+		var canvas1 = $('#canvas1');
+		var p1 = new Phenome(g1,canvas1);
+		p1.render(width,height);
+		
+		
+		var canvas2 = $('#canvas2');
+		var p2 = new Phenome(g2,canvas2);
+		p2.render(width,height,
+			function(){
+			
+			$('#overlay1').fadeOut(2000);
+			
+			$('#overlay2').fadeOut(2000,function(){
+				
+				$('#slide1').css('top',"0px");
+				$('#slide2').css('top',"0px");
+				$('#canvas1').fadeIn(1000);
+				$('#canvas2').fadeIn(1000);
+				
+			});
+		});
+		
+		$("#left").click(pickLeft);
+		$("#right").click(pickRight);
+		
+		
+
+
+		 });
+    </script>
+  </body>
+</html>
