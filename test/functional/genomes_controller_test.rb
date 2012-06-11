@@ -18,7 +18,7 @@ class GenomesControllerTest < ActionController::TestCase
 
   test "should create genome" do
     assert_difference('Genome.count') do
-      post :create, genome: {  }
+      post :create, genome: { angle: @genome.angle, length: @genome.length, lengthmult: @genome.lengthmult, recbias: @genome.recbias, recursion: @genome.recursion, spread: @genome.spread, spreadmult: @genome.spreadmult }
     end
 
     assert_redirected_to genome_path(assigns(:genome))
@@ -35,7 +35,7 @@ class GenomesControllerTest < ActionController::TestCase
   end
 
   test "should update genome" do
-    put :update, id: @genome, genome: {  }
+    put :update, id: @genome, genome: { angle: @genome.angle, length: @genome.length, lengthmult: @genome.lengthmult, recbias: @genome.recbias, recursion: @genome.recursion, spread: @genome.spread, spreadmult: @genome.spreadmult }
     assert_redirected_to genome_path(assigns(:genome))
   end
 

@@ -1,4 +1,4 @@
- 
+
 class GenomesController < ApplicationController
   # GET /genomes
   # GET /genomes.json
@@ -8,6 +8,7 @@ class GenomesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @genomes }
+      format.xml { render xml: @genomes }
     end
   end
 

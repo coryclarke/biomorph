@@ -1,20 +1,53 @@
 <h1>Listing genomes</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @genomes.each do |genome| %>
-  <tr>
+<% 
+i = 0
+
+@genomes.each do |genome| 
+
+i += 1
+%>
+
+		<div>
+			<div id="overlay1" class="overlay"> </div>
+			<div id="slide1" class="slide">
+				 
+			</div>
+			<div id="canvas<%= i %>" class="canvas">
+			</div>
+  		</div>
+  		
+  		
+	    <script>
+		var width = 500; 
+		var height = 700;  
+
+		var g = new Genome();
+		g.setData(<%= genome.spread %>,<%= genome.spreadmult %>,<%= genome.lengthmult %>,<%= genome.length %>,<%= genome.recursion %>,<%= genome.recbias %>,<%= genome.angle %>);
+		var canv = $('#canvas<%= i %>');
+		var p = new Phenome(g,canv);
+		p.render(width,height);
+		
+		</script>	
+  		
+  		
+  
+  
+	<!--
+    <td><%= genome.spread %></td>
+    <td><%= genome.spreadmult %></td>
+    <td><%= genome.lengthmult %></td>
+    <td><%= genome.length %></td>
+    <td><%= genome.recursion %></td>
+    <td><%= genome.recbias %></td>
+    <td><%= genome.angle %></td>
     <td><%= link_to 'Show', genome %></td>
     <td><%= link_to 'Edit', edit_genome_path(genome) %></td>
     <td><%= link_to 'Destroy', genome, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+    -->
+  
 <% end %>
-</table>
 
 <br />
 

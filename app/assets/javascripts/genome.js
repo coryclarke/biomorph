@@ -16,35 +16,38 @@ function Genome(){
 	
 	this.loadDataFromURL = function(){
 		
-		this.spread = this.urlParam('spread');
-		if(this.spread == undefined) this.spread = 35;
-	
-		this.spreadmult = this.urlParam('spreadmult');
-		if(this.spreadmult == undefined) this.spreadmult = 1;
-		
-		this.lengthmult = this.urlParam('lengthmult');
-		if(this.lengthmult == undefined) this.lengthmult = .7;
-			
-		this.length = this.urlParam('length');
-		if(this.length == undefined) this.length = 80;
-		
-		this.recursion = this.urlParam('recursion');
-		if(this.recursion == undefined) this.recursion = 4;
-		if(this.recursion > 10) this.recursion = 10;
-		if(this.recursion < 2) this.recursion = 2;
-		
-		this.recbias = this.urlParam('recbias');
-		if(this.recbias == undefined) this.recbias = 1;
-		
-		this.angle = this.urlParam('angle');
-		if(this.angle == undefined) this.angle = 1;
-		
+		this.setData(this.urlParam('spread'),this.urlParam('spreadmult'),this.urlParam('lengthmult'),this.urlParam('length'),this.urlParam('recursion'),this.urlParam('recbias'),this.urlParam('angle'));
 		
 		
 	
 	}
 	
+	this.setData = function(spread,spreadmult,lengthmult,length,recursion,recbias,angle){
 	
+		this.spread = spread
+		if(this.spread == undefined) this.spread = 35;
+	
+		this.spreadmult = spreadmult
+		if(this.spreadmult == undefined) this.spreadmult = 1;
+		
+		this.lengthmult = lengthmult
+		if(this.lengthmult == undefined) this.lengthmult = .7;
+			
+		this.length = length
+		if(this.length == undefined) this.length = 80;
+		
+		this.recursion = recursion
+		if(this.recursion == undefined) this.recursion = 4;
+		if(this.recursion > 10) this.recursion = 10;
+		if(this.recursion < 2) this.recursion = 2;
+		
+		this.recbias = recbias
+		if(this.recbias == undefined) this.recbias = 1;
+		
+		this.angle = angle
+		if(this.angle == undefined) this.angle = 1;
+		
+	}
 	
 	this.mutate = function(){
 		
